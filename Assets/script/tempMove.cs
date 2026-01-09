@@ -11,13 +11,17 @@ public class tempMove : MonoBehaviour
 
     [SerializeField] float speed = 2f;
     [SerializeField] GameObject obj;
-    [SerializeField] float jumpPower = 0.5f;
+    [SerializeField] float jumpPower = 10f;
 
     tempEnemy enemy;
 
     Camera cam;
 
     public LayerMask groundLayerMask;
+
+    float moveX;
+
+    bool jump;
 
     void Start()
     {
@@ -36,7 +40,7 @@ public class tempMove : MonoBehaviour
         {
             if (IsGrounded())
             {
-                float moveX = 0f;
+                moveX = 0f;
 
                 if (Input.GetKey(KeyCode.D))
                 {
@@ -48,10 +52,8 @@ public class tempMove : MonoBehaviour
                 }
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    rb.linearVelocityY += jumpPower;
+                    jump = true;
                 }
-
-                rb.linearVelocityX = moveX * speed;
             }
 
             cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
@@ -69,6 +71,17 @@ public class tempMove : MonoBehaviour
                 isControlled = true;
                 enemy.isControlled = false;
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocityX = moveX * speed;
+
+        if (jump)
+        {
+            rb.linearVelocityY += jumpPower;
+            jump = false;
         }
     }
 

@@ -498,7 +498,7 @@ MonoBehaviour:
   isControlled: 1
   speed: 2
   obj: {fileID: 1686800524}
-  jumpPower: 0.3
+  jumpPower: 2
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1
