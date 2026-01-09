@@ -1,23 +1,36 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class tempEnemy : MonoBehaviour
 {
     public bool isControlled = false;
     [SerializeField] float speed = 2.0f;
-    [SerializeField] float jumpPower = 0.5f;
+    [SerializeField] float jumpPower = 2f;
+
+    Collider2D playerCollider;
+    public LayerMask groundLayerMask;
+
+    Camera cam;
 
     Rigidbody2D rb;
+
+    float moveX;
+    bool jump;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        cam = Camera.main;
+
+        playerCollider = GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (IsGrounded()) {
         if (isControlled)
         {
-            float moveX = 0f;
+            moveX = 0f;
 
             if (Input.GetKey(KeyCode.D))
             {
@@ -27,14 +40,35 @@ public class tempEnemy : MonoBehaviour
             {
                 moveX -= 1f;
             }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                rb.linearVelocityY += jumpPower;
+                jump = true;
             }
 
-            rb.linearVelocityX = moveX * speed;
-
-            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
+        } 
+    }
+    void FixedUpdate()
+    {
+        rb.linearVelocityX = moveX * speed;
+
+        if (jump)
+        {
+            rb.linearVelocityY += jumpPower;
+            jump = false;
+        }
+    }
+    bool IsGrounded()
+    {
+        if (groundLayerMask == 0)
+        {
+            return true;
+        }
+
+        RaycastHit2D leftHit = Physics2D.Raycast(playerCollider.bounds.min, Vector2.down, 0.3f, groundLayerMask);
+        RaycastHit2D rightHit = Physics2D.Raycast(new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.min.y), Vector2.down, 0.3f, groundLayerMask);
+
+        return leftHit || rightHit;
     }
 }

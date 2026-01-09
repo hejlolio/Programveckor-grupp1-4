@@ -15,6 +15,8 @@ public class tempMove : MonoBehaviour
 
     tempEnemy enemy;
 
+    Camera cam;
+
     public LayerMask groundLayerMask;
 
     void Start()
@@ -24,6 +26,8 @@ public class tempMove : MonoBehaviour
         enemy = obj.GetComponent<tempEnemy>();
 
         playerCollider = GetComponent<Collider2D>();
+
+        cam = Camera.main;
     }
 
     void Update()
@@ -50,7 +54,7 @@ public class tempMove : MonoBehaviour
                 rb.linearVelocityX = moveX * speed;
             }
 
-            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -77,7 +81,6 @@ public class tempMove : MonoBehaviour
 
         RaycastHit2D leftHit = Physics2D.Raycast(playerCollider.bounds.min, Vector2.down, 0.3f, groundLayerMask);
         RaycastHit2D rightHit = Physics2D.Raycast(new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.min.y), Vector2.down, 0.3f, groundLayerMask);
-
 
         return leftHit || rightHit;
     }
