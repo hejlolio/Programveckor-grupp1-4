@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class tempEnemy : MonoBehaviour
 {
-    public bool isControlled = false;
+    public bool isControlled = false; //Varje objekt som spelaren kan kontrollera har denna bool
+                                      //Om den är true så kontolleras objektet
     [SerializeField] float speed = 2.0f;
     [SerializeField] float jumpPower = 2f;
 
@@ -19,37 +20,47 @@ public class tempEnemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.Log($"error: {transform.name} har ej en rigidbody2D");
+        }
 
         cam = Camera.main;
 
         playerCollider = GetComponent<Collider2D>();
+        if (playerCollider == null)
+        {
+            Debug.Log($"error: {transform.name} har ej en collider2D");
+        }
     }
 
-    void Update()
+    void Update() //all input hanteras här
     {
-        if (IsGrounded()) {
-        if (isControlled)
+        if (isControlled) 
         {
             moveX = 0f;
 
-            if (Input.GetKey(KeyCode.D))
+            if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX += 1f;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                moveX -= 1f;
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                jump = true;
-            }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    moveX += 1f;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    moveX -= 1f;
+                }
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    jump = true;
+                }
 
-            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
-        }
+                cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            }
         } 
     }
-    void FixedUpdate()
+
+    void FixedUpdate() //all fysik hanteras här
     {
         rb.linearVelocityX = moveX * speed;
 
@@ -59,6 +70,7 @@ public class tempEnemy : MonoBehaviour
             jump = false;
         }
     }
+
     bool IsGrounded()
     {
         if (groundLayerMask == 0)

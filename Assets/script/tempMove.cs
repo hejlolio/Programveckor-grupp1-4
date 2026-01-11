@@ -1,11 +1,12 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class tempMove : MonoBehaviour
 {
-    public bool isControlled = true;
-
+    public bool isControlled = true; //Varje objekt som spelaren kan kontrollera har denna bool
+                                     //Om den är true så kontolleras objektet, se ln 49
     Rigidbody2D rb;
     Collider2D playerCollider;
 
@@ -13,7 +14,7 @@ public class tempMove : MonoBehaviour
     [SerializeField] GameObject obj;
     [SerializeField] float jumpPower = 10f;
 
-    tempEnemy enemy;
+    tempEnemy enemy; //temporärt innnan ett system för att ta över fiender finns
 
     Camera cam;
 
@@ -26,22 +27,30 @@ public class tempMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.Log($"error: {transform.name} har ej en rigidbody2D");
+        }
 
         enemy = obj.GetComponent<tempEnemy>();
 
         playerCollider = GetComponent<Collider2D>();
+        if (playerCollider == null)
+        {
+            Debug.Log($"error: {transform.name} har ej en collider2D");
+        }
 
         cam = Camera.main;
     }
 
-    void Update()
+    void Update() //all input hanteras här
     {
         if (isControlled)
         {
-            if (IsGrounded())
+            moveX = 0f;
+            
+            if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX = 0f;
-
                 if (Input.GetKey(KeyCode.D))
                 {
                     moveX += 1f;
@@ -50,16 +59,17 @@ public class tempMove : MonoBehaviour
                 {
                     moveX -= 1f;
                 }
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     jump = true;
                 }
             }
 
+            //flyttar på kameran, Slerp så att kameran inte bara teleporterar
             cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G)) //temporär keybind innan vi kommit på hur man ska ta över fiender
         {
             if (isControlled)
             {
@@ -74,7 +84,7 @@ public class tempMove : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //allt som involverar fysik hanteras här
     {
         rb.linearVelocityX = moveX * speed;
 
@@ -85,7 +95,7 @@ public class tempMove : MonoBehaviour
         }
     }
 
-    bool IsGrounded()
+    bool IsGrounded() //tog detta från någonstans, vet inte hur det funkar lmao
     {
         if (groundLayerMask == 0)
         {
