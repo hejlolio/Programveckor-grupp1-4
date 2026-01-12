@@ -819,15 +819,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2184908711378682909, guid: 526c02b298c2b66488c19e3a87b23856, type: 3}
-      propertyPath: groundLayerMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 526c02b298c2b66488c19e3a87b23856, type: 3}
+--- !u!1 &1686800524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 345175970531969121, guid: 526c02b298c2b66488c19e3a87b23856, type: 3}
+  m_PrefabInstance: {fileID: 1686800523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1878631457
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::tempMove
   isControlled: 1
   speed: 2
-  obj: {fileID: 0}
+  obj: {fileID: 1686800524}
   jumpPower: 2
   groundLayerMask:
     serializedVersion: 2
