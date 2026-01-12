@@ -30,14 +30,17 @@ public class tempMove : MonoBehaviour
         if (rb == null)
         {
             Debug.Log($"error: {transform.name} har ej en rigidbody2D");
+            return;
         }
 
-        enemy = obj.GetComponent<tempEnemy>();
+        if (obj != null)
+            enemy = obj.GetComponent<tempEnemy>();
 
         playerCollider = GetComponent<Collider2D>();
         if (playerCollider == null)
         {
             Debug.Log($"error: {transform.name} har ej en collider2D");
+            return;
         }
 
         cam = Camera.main;
@@ -69,7 +72,7 @@ public class tempMove : MonoBehaviour
             cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G)) //temporär keybind innan vi kommit på hur man ska ta över fiender
+        if (Input.GetKeyDown(KeyCode.G) || enemy != null) //temporär keybind innan vi kommit på hur man ska ta över fiender
         {
             if (isControlled)
             {
