@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - enemy1
-  - enemy2
-  - enemy3
-  - enemy4
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -17,10 +13,10 @@ TagManager:
   - UI
   - Player
   - Obstruction
-  - Enemy 2
-  - Enemy 3
   - 
   - 
+  - 
+  - OneWayPlatform
   - 
   - 
   - 

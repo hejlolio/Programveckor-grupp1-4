@@ -38,10 +38,10 @@ public class PlayerOneWay : MonoBehaviour
 
     private IEnumerator DisableCollision()
     {
-        CapsuleCollider2D platformCollider = CurrentOneWayPlatform.GetComponent<CapsuleCollider2D>();
+        BoxCollider2D platformCollider = CurrentOneWayPlatform.GetComponent<BoxCollider2D>();
 
         Physics2D.IgnoreCollision(PlayerCollider, platformCollider);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
         Physics2D.IgnoreCollision(PlayerCollider, platformCollider, false);
     }
 
