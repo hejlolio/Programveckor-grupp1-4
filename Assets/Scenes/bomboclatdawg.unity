@@ -866,7 +866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::tempMove
   isControlled: 1
   speed: 2
-  obj: {fileID: 0}
+  obj: {fileID: 1988140242}
   jumpPower: 2
   groundLayerMask:
     serializedVersion: 2
@@ -1017,6 +1017,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1988140242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 345175970531969121, guid: 526c02b298c2b66488c19e3a87b23856, type: 3}
+  m_PrefabInstance: {fileID: 1686800523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

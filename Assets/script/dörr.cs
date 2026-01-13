@@ -49,12 +49,12 @@ public class dörr : MonoBehaviour
 
             if (nextLevel != null)
             {
-                SwitchScene(nextLevel);
+                StartCoroutine(SwitchScene(nextLevel));
             }
         }
         else
         {
-            StartCoroutine(RevealText("You're not the right shape!!"));
+            StartCoroutine(RevealText("You're not the right shape"));
         }
     }
 
