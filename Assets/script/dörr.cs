@@ -47,7 +47,7 @@ public class dörr : MonoBehaviour
         {
             isPlayerNearby = true;
 
-            if (nextLevel != null)
+            if (nextLevel != "")
             {
                 StartCoroutine(SwitchScene(nextLevel));
             }
