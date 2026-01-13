@@ -1,17 +1,24 @@
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AiPlatformerPath : MonoBehaviour
 {
-    public Transform target;
+    //target where the lead will try to move to
+    Transform target;
 
+    public PathfindingTargetList targetList;
+    public UnityEvent hasReachedEnd;
+
+    //speed off the lead down the path
     public float speed = 1f;
-    public float nextWaypointDistance = 3f;
+    //Decides how near the next waypoint the lead needs to be. Makes the lead follow the path more closely at higher amounts
+    public float nextWaypointDistance = 0.5f;
+    //decides how many the path will update per second
     public float repathInterval = 0.5f;
 
     Path path;
     int currentWaypoint;
-    bool reachedEnd;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -21,11 +28,14 @@ public class AiPlatformerPath : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        targetList = GetComponent<PathfindingTargetList>();
 
+        //Update the path an amount of times per second equal to repathInterval
         InvokeRepeating("UpdatePath", 0f, repathInterval);
     }
     void UpdatePath()
     {
+        //Checks that an existing path isnt currently loading while the path is updating
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
@@ -33,10 +43,19 @@ public class AiPlatformerPath : MonoBehaviour
     }
     void OnPathComplete(Path p)
     {
+        //checks for errors
         if (!p.error)
         {
             path = p;
             currentWaypoint = 0;
+        }
+    }
+
+    private void Update()
+    {
+        if (targetList != null)
+        {
+            target = targetList.currentTarget;
         }
     }
 
@@ -48,16 +67,7 @@ public class AiPlatformerPath : MonoBehaviour
             return;
         }
 
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEnd = true;
-            return;
-        }
-        else
-        {
-            reachedEnd = false;
-        }
-
+        //Decides a direction down the path then moves the lead in that direction
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 velocity = (direction * Time.deltaTime).normalized;
 
@@ -65,9 +75,15 @@ public class AiPlatformerPath : MonoBehaviour
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
+        //Updates waypoint when lead reaches the next waypoint
         if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        hasReachedEnd.Invoke();
     }
 }
