@@ -55,7 +55,7 @@ public class AiPlatformerPath : MonoBehaviour
     {
         if (targetList != null)
         {
-            target = targetList.currentTarget;
+            target = targetList.currentTarget.transform;
         }
     }
 
@@ -64,6 +64,12 @@ public class AiPlatformerPath : MonoBehaviour
     {
         if (path == null)
         {
+            return;
+        }
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            hasReachedEnd.Invoke();
+            UpdatePath();
             return;
         }
 
@@ -80,10 +86,5 @@ public class AiPlatformerPath : MonoBehaviour
         {
             currentWaypoint++;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        hasReachedEnd.Invoke();
     }
 }

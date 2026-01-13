@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PathfindingTargetList : MonoBehaviour
 {
-    public List<Transform> targets;
-    [HideInInspector] public Transform currentTarget;
+    public List<GameObject> targets;
+    [HideInInspector] public GameObject currentTarget;
     [SerializeField] int currentTargetNumber;
 
     public Seeker seeker;
     public AiPlatformerPath platformerPath;
+
+    private int lastIncreaseFrame = 1;
 
     private void Start()
     {
@@ -30,7 +32,6 @@ public class PathfindingTargetList : MonoBehaviour
         {
             return;
         }
-
         if (currentTargetNumber >= targets.Count)
         {
             currentTargetNumber = 0;
@@ -40,7 +41,15 @@ public class PathfindingTargetList : MonoBehaviour
 
     public void IncreaseTargetNumber()
     {
+        if (lastIncreaseFrame == Time.frameCount)
+        {
+            return;
+        }
+        lastIncreaseFrame = Time.frameCount;
+
         currentTargetNumber++;
+        print("reached target!");
+
     }
 
 }
