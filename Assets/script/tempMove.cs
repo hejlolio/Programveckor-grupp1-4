@@ -34,7 +34,13 @@ public class tempMove : MonoBehaviour
         }
 
         if (obj != null)
+        {
             enemy = obj.GetComponent<tempEnemy>();
+        }
+        else 
+        {
+            return;
+        }
 
         playerCollider = GetComponent<Collider2D>();
         if (playerCollider == null)
@@ -49,11 +55,11 @@ public class tempMove : MonoBehaviour
     void Update() //all input hanteras här
     {
         if (isControlled)
-        {
-            moveX = 0f;
-            
+        {            
             if (IsGrounded()) //om spelaren nuddar marken
             {
+                moveX = 0f;
+
                 if (Input.GetKey(KeyCode.D))
                 {
                     moveX += 1f;
@@ -72,7 +78,7 @@ public class tempMove : MonoBehaviour
             cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G) || enemy != null) //temporär keybind innan vi kommit på hur man ska ta över fiender
+        if (Input.GetKeyDown(KeyCode.G) && enemy != null) //temporär keybind innan vi kommit på hur man ska ta över fiender
         {
             if (isControlled)
             {
@@ -89,7 +95,9 @@ public class tempMove : MonoBehaviour
 
     void FixedUpdate() //allt som involverar fysik hanteras här
     {
-        rb.linearVelocityX = moveX * speed;
+        if (IsGrounded()) {
+            rb.linearVelocityX = moveX * speed;
+        }
 
         if (jump)
         {

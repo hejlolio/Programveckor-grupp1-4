@@ -38,10 +38,10 @@ public class tempEnemy : MonoBehaviour
     {
         if (isControlled) 
         {
-            moveX = 0f;
-
             if (IsGrounded()) //om spelaren nuddar marken
             {
+                moveX = 0f;
+
                 if (Input.GetKey(KeyCode.D))
                 {
                     moveX += 1f;
@@ -54,9 +54,9 @@ public class tempEnemy : MonoBehaviour
                 {
                     jump = true;
                 }
-
-                cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
             }
+
+            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         } 
     }
 
