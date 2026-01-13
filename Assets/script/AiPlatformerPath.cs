@@ -5,9 +5,9 @@ public class AiPlatformerPath : MonoBehaviour
 {
     public Transform target;
 
-    public float speed = 100f;
+    public float speed = 1f;
     public float nextWaypointDistance = 3f;
-    public float repetition = 0.5f;
+    public float repathInterval = 0.5f;
 
     Path path;
     int currentWaypoint;
@@ -22,7 +22,7 @@ public class AiPlatformerPath : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, repetition);
+        InvokeRepeating("UpdatePath", 0f, repathInterval);
     }
     void UpdatePath()
     {
@@ -61,7 +61,7 @@ public class AiPlatformerPath : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 velocity = (direction * Time.deltaTime).normalized;
 
-        rb.linearVelocityX = velocity.x * speed;
+        rb.linearVelocity = velocity * speed;
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
