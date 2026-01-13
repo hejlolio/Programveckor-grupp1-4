@@ -1,37 +1,91 @@
+using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class dörr : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public LayerMask targetLayer;
+    [SerializeField] LayerMask targetLayer;
+    [SerializeField] string neededTagName;
+
+    [SerializeField] float openPositionY;
+
+    [SerializeField] float textRevealDelay;
+
+    [SerializeField] bool isLevelTransition;
+    [SerializeField] string nextLevel;
+
+    [SerializeField] TextMeshProUGUI TextField;
+
     bool isPlayerNearby = false;
 
+    float startPosY;
 
     void Start()
     {
+        isPlayerNearby = false;
 
+        startPosY = transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        if (isPlayerNearby == true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, startPosY + openPositionY, transform.position.z), 0.02f);
+        }
+        else if (isPlayerNearby == false && transform.position.y > startPosY)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, startPosY, transform.position.z), 0.02f);
+        }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
-        if (collision.tag == "Enemy2" && collision.gameObject.layer == 6)
+        if (collision.gameObject.CompareTag(neededTagName) && ((1 << collision.gameObject.layer) & targetLayer) != 0)
         {
-            SceneManager.LoadScene("level2");
+            isPlayerNearby = true;
+
+            if (nextLevel != null)
+            {
+                SwitchScene(nextLevel);
+            }
         }
         else
         {
-            print("You´re not the right shape!");
+            StartCoroutine(RevealText("You're not the right shape!!"));
         }
-
-
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isPlayerNearby && collision.gameObject.CompareTag(neededTagName) && ((1 << collision.gameObject.layer) & targetLayer) != 0)
+        {
+            isPlayerNearby = false;
+        }
+    }
+
+    IEnumerator SwitchScene(string scene)
+    {
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene(scene);
+    }
+
+    IEnumerator RevealText(string finalText)
+    {
+        TextField.text = "";
+
+        foreach (char c in finalText)
+        {
+            TextField.text += c;
+
+            yield return new WaitForSeconds(textRevealDelay);
+        }
+
+        yield return new WaitForSeconds(2);
+
+        TextField.text = "";
+    }
 }
