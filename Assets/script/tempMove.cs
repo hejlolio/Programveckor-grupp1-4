@@ -75,7 +75,7 @@ public class tempMove : MonoBehaviour
             }
 
             //flyttar på kameran, Slerp så att kameran inte bara teleporterar
-            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
         if (Input.GetKeyDown(KeyCode.G) && enemy != null) //temporär keybind innan vi kommit på hur man ska ta över fiender
