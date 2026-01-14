@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 51067243}
   - component: {fileID: 51067242}
   - component: {fileID: 51067241}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 587014616}
   - component: {fileID: 587014615}
   - component: {fileID: 587014614}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 800241175}
   - component: {fileID: 800241174}
   - component: {fileID: 800241173}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AstarPathfindingProject::AstarPath
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAIIewm494ygQIAAD0FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoXxB9hxby0hpIckTEgnF1+EtMYaZMkjyQGS4b9Xkm3s0BPLe/v5duUvxISugRip1orRJ0kB/ZwgZ6Mfk4F8hBPeS7Fln9D7vDNqSueEvc8rNkxaPHRhWlZgFCO/xJ4758CCjWCFVNWK7mEptdEWLjDXYCkljYsWFvqaoJP9mWYu5GytKHXWp7WyYHKxJgFhQI1cg1kQposgTuO7eRdksXCeJGmURGEXPU1n4SJapOlisZoGdz5VIwjHVQ3UzTVkjJPZXV89nCXeVdipO6/As0RyznTXNDLn2ouyrUtQ4FShDFsNfKPhLLZACWxfGpdzHP1SFBpMJ5HC53umrJhtWvRbtgpXWB/a9j4wb1yhMGonaJM+/cdPQ08XSlaPfd0wcDVMycjhFZ8J1ma0gjF8P2rdq3TE/IB3HN5LEM9yrWQjqCWNalxooyG6H/5eR1uWQA4D3rZ6Azb1IHu/8X7fboaLn/605KzaeennLbDl0gvuzwSUXc4f27A/It2lsKjr4q+GN7wfX1tHPDCljaW6KYVrbycb5VzRymvmpmnMUioBHu6arkFgbs4bm8bcrvCGG5W9YR6we1dd8Y7rn8tNiIcH/yC4oTbyeF2WLuXxCXT50hjOBAxNO+LZ6rSUQrQXNtakD9s2qsBkFLZvGP1+WoiQHYkW0bxII1JkSTzNwmBOdlkcZiRLaAzI3x4Tdk7MN22jnTx2a2JILuyd9Z+byVrh2l87Vfi4Zp+VHEnORCG3RAGIl28ZNChbw75LuqLM6rMFY5jw60ZfOeKSHIDmV//cD7o6GYXzYfoc1exDGofkaOk/Lzly8PWUNwo+GBxd7T7ZBV3+AVBLAwQUAAAICAAACCHsF29Gxm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0UnJyUrKRqZFJmrlRcpqlmbGupaGBSXKSpbGhZbKlWYpxqlIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAACCHsJuPeMoECAAA9BQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAACCHsF29Gxm0AAAB4AAAACQAkAAAAAAAAAAAAAADOAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAIYDAAAAAA==
+    dataString: UEsDBBQAAAgIAAAIIexQL1JVfQIAADgFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxMZi4t5YQ0kMSJqSTiy9CXmMNsuSR5ADJ8N+7km3s0BPLe/v5duUvwqWpgFml15pnTyoD8nNEnE1+jHryEU50r+SWf0Ln884zWzgn6n1eqeUK8dCFGVWC1Zz9knvhnAMEa8lzpctVtoelMtYgnFNhACmtrIuWCH2NyAl/xokLOaM1XTjrE60kGF3QZCAt6IFrMAnCxTwI76IwbIMQC2dxvIimbex4MQnn0/k8WY2DO5+mlkzQsoLMzdRni+LJXVc5nMTeVeLErVfgWaaE4KZtmNhz5QXZVgVocIpknOL8vslwEiFQAN8X1uUcRr/kuQHbyqPp+Z5rFLJJS36rRt2SmkPT3gcVtSsUz3xXTc6n/+hx6Olcq/KxKxsGroQtODu80jOjxg7UH8L3g869SEcqDnQn4L0A+azWWtUyQ9Lq2oXWBqb3/d/rZMsC2KHHm1ZvwLrqVe+W3a3azXDxw5+Wgpc7r/ysAbZCeb39hYDG3fzBhv39mDYFoq6Lvwbe6H54aC3xwLWxSLVTStfeTtXauZKV18xNU9ul0hI83DZdgaTCnjeYxt5u8IYblL1hHqh7Um3xluteyk2Ih3v/ILihNup4XZYp1PEJTPFSW8El9E074hl1WiopmwMbatKFbWudUzYI29c8+35ahLEdm86ns3wxZXkSR+MkDGZsl0RhwpI4i4D42+MS56Ri0zTayoNbk31yiXfWfWlGa00rf+yZpsc1/yzVQHIuc7VlGkC+fMtgQGMNfJbZKuOozxas5dKvm3ylRCh2gCy9+qd+0NXJapr206ek4h/KOiQlS/9lSYmDr6e80fDB4ehqd8ku5PIPUEsDBBQAAAgIAAAIIewXb0bGbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrRScnJSspGpkUmauVFymqWZsa6loYFJcpKlsaFlsqVZinGqUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAAAIIexQL1JVfQIAADgFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAIIewXb0bGbQAAAHgAAAAJACQAAAAAAAAAAAAAAMoCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAggMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 907518279}
   - component: {fileID: 907518278}
   - component: {fileID: 907518277}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   - component: {fileID: 1057778236}
   - component: {fileID: 1057778235}
   - component: {fileID: 1057778234}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1640,7 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaa4094832baa94780c4d0b532f062f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AiThroughOneWay
-  pathfinderLead: {fileID: 0}
+  pathfinderLead: {fileID: 618136690}
   platformerPath: {fileID: 0}
 --- !u!1 &1170447832
 GameObject:
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 1170447835}
   - component: {fileID: 1170447834}
   - component: {fileID: 1170447833}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Level base (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1795,7 +1795,7 @@ GameObject:
   - component: {fileID: 1263638679}
   - component: {fileID: 1263638678}
   - component: {fileID: 1263638677}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1932,7 +1932,7 @@ GameObject:
   - component: {fileID: 1447077674}
   - component: {fileID: 1447077673}
   - component: {fileID: 1447077672}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2069,7 +2069,7 @@ GameObject:
   - component: {fileID: 1501356948}
   - component: {fileID: 1501356947}
   - component: {fileID: 1501356946}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2211,7 +2211,7 @@ GameObject:
   - component: {fileID: 1672991681}
   - component: {fileID: 1672991680}
   - component: {fileID: 1672991679}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Level base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2462,7 +2462,7 @@ GameObject:
   - component: {fileID: 2120086361}
   - component: {fileID: 2120086360}
   - component: {fileID: 2120086359}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
