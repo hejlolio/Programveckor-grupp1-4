@@ -17,7 +17,7 @@ public class AiPlatformerPath : MonoBehaviour
     //decides how many the path will update per second
     public float repathInterval = 0.5f;
 
-    Path path;
+    public Path path;
     public int currentWaypoint;
     bool pathComplete = false;
 
