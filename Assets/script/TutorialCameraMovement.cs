@@ -13,12 +13,14 @@ public class TutorialCameraMovement : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> textBoxes; //text lådor som ska ändras
     [SerializeField] List<String> textBoxStrings; //text som ska skrivas i lådor
 
+    [SerializeField] float cameraMoveSpeed; //hur snabbt kameran rör sig
+
     [SerializeField] float textDelay; //tid mellan varje bokstav
 
     [SerializeField] GameObject player;
     tempMove playerScript;
 
-    int activeCamera = 0;
+    GameObject activeCamera;
     
     void Start()
     {
@@ -28,22 +30,29 @@ public class TutorialCameraMovement : MonoBehaviour
         StartCoroutine(Logic());
     }
 
-    void FixedUpdate() //här hanteras rörelsen av kameran
+    void Update() //här hanteras rörelsen av kameran
     {
-        Camera.main.transform.position = UnityEngine.Vector3.Lerp(Camera.main.transform.position, new UnityEngine.Vector3(cameraPoints[activeCamera].transform.position.x, cameraPoints[activeCamera].transform.position.y, Camera.main.transform.position.z), 0.001f);
+        UnityEngine.Vector3 targetPos = new UnityEngine.Vector3(
+            activeCamera.transform.position.x,
+            activeCamera.transform.position.y,
+            Camera.main.transform.position.y
+        );
+
+        Camera.main.transform.position = UnityEngine.Vector3.Lerp(Camera.main.transform.position, targetPos, Time.deltaTime * cameraMoveSpeed);
     }
 
-    IEnumerator Logic()
+    IEnumerator Logic() //här är själva logiken som bestämmer vilken position kameran ska röra sig till
     {
         foreach (GameObject cp in cameraPoints)
         {
-            activeCamera += 1;
+            activeCamera = cp;
 
             yield return new WaitForSeconds(4);
 
-            StartCoroutine(RevealText(textBoxStrings[activeCamera], textBoxes[activeCamera]));
+            int index = cameraPoints.IndexOf(cp);
+            yield return StartCoroutine(RevealText(textBoxStrings[index], textBoxes[index]));
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2);
         }
 
         playerScript.isControlled = true;
@@ -53,6 +62,8 @@ public class TutorialCameraMovement : MonoBehaviour
 
     IEnumerator RevealText(string toWrite, TextMeshProUGUI Text)
     {
+        Text.text = "";
+
         foreach (char c in toWrite)
         {
             Text.text += c;
