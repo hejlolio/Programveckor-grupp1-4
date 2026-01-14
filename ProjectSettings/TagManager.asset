@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - OneWayPlatform
+<<<<<<< HEAD
+=======
+  - Enemy1
+>>>>>>> 157dbb0dc666bd2c67edf09d33adbfad037c4ac7
   layers:
   - Default
   - TransparentFX
@@ -13,7 +18,7 @@ TagManager:
   - UI
   - Player
   - Obstruction
-  - 
+  - Pathfinding
   - 
   - 
   - OneWayPlatform
