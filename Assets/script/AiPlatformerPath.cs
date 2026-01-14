@@ -18,7 +18,8 @@ public class AiPlatformerPath : MonoBehaviour
     public float repathInterval = 0.5f;
 
     Path path;
-    int currentWaypoint;
+    public int currentWaypoint;
+    bool pathComplete = false;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -29,6 +30,11 @@ public class AiPlatformerPath : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         targetList = GetComponent<PathfindingTargetList>();
+
+        if (targetList != null && targetList.currentTarget != null)
+        {
+            target = targetList.currentTarget.transform;
+        }
 
         //Update the path an amount of times per second equal to repathInterval
         InvokeRepeating("UpdatePath", 0f, repathInterval);
@@ -48,6 +54,7 @@ public class AiPlatformerPath : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+            pathComplete = false;
         }
     }
 
@@ -68,8 +75,11 @@ public class AiPlatformerPath : MonoBehaviour
         }
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            hasReachedEnd.Invoke();
-            UpdatePath();
+            if (!pathComplete)
+            {
+                pathComplete = true;
+                hasReachedEnd.Invoke();
+            }
             return;
         }
 
