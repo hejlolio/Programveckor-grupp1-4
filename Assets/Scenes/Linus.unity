@@ -821,7 +821,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  speed: 5
+  speed: 2
   nextWaypointDistance: 1
   repathInterval: 0.3
   currentWaypoint: 0
@@ -1635,7 +1635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107157549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbaa4094832baa94780c4d0b532f062f, type: 3}
   m_Name: 
