@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -24,7 +23,7 @@ public class dropping : MonoBehaviour
         if (timer > 1 && timer < 1.5)
         {
             //velocity på rb
-            
+
         }
 
 
@@ -36,14 +35,14 @@ public class dropping : MonoBehaviour
 
     public void Throw(GameObject target, Vector3 spawnPos)
     {
-        bool Possible = CalculateTrajectory(Vector3.Distance(target.transform.position, transform.position), 2f, out float angle));
+        bool Possible = CalculateTrajectory(Vector3.Distance(target.transform.position, transform.position), 2f, out float angle);
 
         if (Possible)
         {
             var spawned = Instantiate(bottlePrefab);
 
             spawned.transform.eulerAngles = new Vector3(angle, 0, 0);
-            
+
             Rigidbody2D rb2 = spawned.GetComponent<Rigidbody2D>();
             rb2.linearVelocityX = velocity;
         }

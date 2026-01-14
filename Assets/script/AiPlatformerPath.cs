@@ -31,11 +31,6 @@ public class AiPlatformerPath : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         targetList = GetComponent<PathfindingTargetList>();
 
-        if (targetList != null && targetList.currentTarget != null)
-        {
-            target = targetList.currentTarget.transform;
-        }
-
         //Update the path an amount of times per second equal to repathInterval
         InvokeRepeating("UpdatePath", 0f, repathInterval);
     }
@@ -73,6 +68,8 @@ public class AiPlatformerPath : MonoBehaviour
         {
             return;
         }
+
+        //checks that path is complete then moves on to next waypoint
         if (currentWaypoint >= path.vectorPath.Count)
         {
             if (!pathComplete)
