@@ -24,8 +24,6 @@ public class dörr : MonoBehaviour
 
     void Start()
     {
-        isPlayerNearby = false;
-
         startPosY = transform.position.y;
     }
 
@@ -68,7 +66,7 @@ public class dörr : MonoBehaviour
 
     IEnumerator SwitchScene(string scene)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         SceneManager.LoadScene(scene);
     }
