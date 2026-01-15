@@ -5,17 +5,19 @@ TagManager:
   serializedVersion: 3
   tags:
   - OneWayPlatform
+  - Enemy1
+  - Enemy2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walls
   - Water
   - UI
   - Enviroment
   - OnewayPlatform
   - Enemy1
-  - 
+  - Player
   - 
   - 
   - 
