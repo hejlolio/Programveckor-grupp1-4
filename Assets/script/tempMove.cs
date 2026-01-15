@@ -1,6 +1,3 @@
-using System;
-using Unity.VisualScripting;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class tempMove : MonoBehaviour
@@ -37,7 +34,7 @@ public class tempMove : MonoBehaviour
         {
             enemy = obj.GetComponent<tempEnemy>();
         }
-        else 
+        else
         {
             return;
         }
@@ -55,18 +52,18 @@ public class tempMove : MonoBehaviour
     void Update() //all input hanteras här
     {
         if (isControlled)
-        {            
+        {
             if (IsGrounded()) //om spelaren nuddar marken
             {
                 moveX = 0f;
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                    moveX += 1f;
+                    moveX = 1f;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    moveX -= 1f;
+                    moveX = -1f;
                 }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -95,7 +92,8 @@ public class tempMove : MonoBehaviour
 
     void FixedUpdate() //allt som involverar fysik hanteras här
     {
-        if (IsGrounded()) {
+        if (IsGrounded())
+        {
             rb.linearVelocityX = moveX * speed;
         }
 
