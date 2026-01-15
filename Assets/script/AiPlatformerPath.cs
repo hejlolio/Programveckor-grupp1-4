@@ -33,6 +33,7 @@ public class AiPlatformerPath : MonoBehaviour
 
         //Update the path an amount of times per second equal to repathInterval
         InvokeRepeating("UpdatePath", 0f, repathInterval);
+
     }
     void UpdatePath()
     {
