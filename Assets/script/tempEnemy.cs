@@ -47,18 +47,19 @@ public class tempEnemy : MonoBehaviour
     {
         if (isControlled) 
         {
+            moveX = 0f;
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveX += 1f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX -= 1f;
+            }
+
             if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX = 0f;
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    moveX += 1f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    moveX -= 1f;
-                }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     jump = true;

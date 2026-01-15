@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class tempMove : MonoBehaviour
 {
@@ -10,6 +13,9 @@ public class tempMove : MonoBehaviour
     Rigidbody2D rb;
     Collider2D playerCollider;
     Collider2D triggerCollider;
+
+    public List<AudioClip> audioClips;
+    [SerializeField] AudioSource audioSource;
 
     [SerializeField] float speed = 2f;
     tempEnemy obj;
@@ -26,6 +32,8 @@ public class tempMove : MonoBehaviour
     bool jump;
 
     bool isEnemyNear = false;
+
+    bool isWalking = false;
 
     void Start()
     {
@@ -51,10 +59,14 @@ public class tempMove : MonoBehaviour
         }
 
         cam = Camera.main;
+
+        StartCoroutine(Footstep());
     }
 
     void Update() //all input hanteras här
     {
+        isWalking = false;
+
         if (isControlled)
         {
             moveX = 0f;
@@ -62,10 +74,14 @@ public class tempMove : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 moveX += 1f;
+
+                isWalking = true;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 moveX -= 1f;
+
+                isWalking = true;
             }
 
             if (IsGrounded()) //om spelaren nuddar marken
@@ -85,12 +101,12 @@ public class tempMove : MonoBehaviour
             if (isControlled)
             {
                 isControlled = false;
-                enemy.isControlled = true;
+                obj.isControlled = true;
             }
             else if (!isControlled)
             {
                 isControlled = true;
-                enemy.isControlled = false;
+                obj.isControlled = false;
             }
         }
     }
@@ -134,5 +150,25 @@ public class tempMove : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.min.y), Vector2.down, 0.3f, groundLayerMask);
 
         return leftHit || rightHit;
+    }
+
+    IEnumerator Footstep()
+    {
+        while (true)
+        {
+            if (isWalking && IsGrounded())
+            {
+                int r = UnityEngine.Random.Range(0, audioClips.Count);
+                AudioClip clip = audioClips[r];
+                audioSource.clip = clip;
+                audioSource.Play();
+
+                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
 }
