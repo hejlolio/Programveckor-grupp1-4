@@ -48,7 +48,7 @@ public class AiPlatformerPath : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            currentWaypoint = 0;
+            currentWaypoint = 1;
             pathComplete = false;
         }
     }
