@@ -10,7 +10,7 @@ using UnityEngine;
 public class TutorialCameraMovement : MonoBehaviour
 {
     [SerializeField] List<GameObject> cameraPoints; //lista över positioner som kameran ska röra sig till
-    [SerializeField] List<TextMeshProUGUI> textBoxes; //text lådor som ska ändras
+    [SerializeField] TextMeshProUGUI Text; //text lådor som ska ändras
     [SerializeField] List<String> textBoxStrings; //text som ska skrivas i lådor
 
     [SerializeField] float cameraMoveSpeed; //hur snabbt kameran rör sig
@@ -28,6 +28,8 @@ public class TutorialCameraMovement : MonoBehaviour
 
         playerScript.isControlled = false;
         StartCoroutine(Logic());
+
+        Text.text = "";
     }
 
     void Update() //här hanteras rörelsen av kameran
@@ -35,7 +37,7 @@ public class TutorialCameraMovement : MonoBehaviour
         UnityEngine.Vector3 targetPos = new UnityEngine.Vector3(
             activeCamera.transform.position.x,
             activeCamera.transform.position.y,
-            Camera.main.transform.position.y
+            Camera.main.transform.position.z
         );
 
         Camera.main.transform.position = UnityEngine.Vector3.Lerp(Camera.main.transform.position, targetPos, Time.deltaTime * cameraMoveSpeed);
@@ -45,22 +47,26 @@ public class TutorialCameraMovement : MonoBehaviour
     {
         foreach (GameObject cp in cameraPoints)
         {
+            break;
+
             activeCamera = cp;
 
             yield return new WaitForSeconds(4);
 
             int index = cameraPoints.IndexOf(cp);
-            yield return StartCoroutine(RevealText(textBoxStrings[index], textBoxes[index]));
+            yield return StartCoroutine(RevealText(textBoxStrings[index]));
 
             yield return new WaitForSeconds(2);
         }
+
+        Text.text = "";
 
         playerScript.isControlled = true;
 
         this.enabled = false;
     }
 
-    IEnumerator RevealText(string toWrite, TextMeshProUGUI Text)
+    IEnumerator RevealText(string toWrite)
     {
         Text.text = "";
 

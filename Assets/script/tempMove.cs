@@ -1,4 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class tempMove : MonoBehaviour
 {
@@ -6,9 +12,13 @@ public class tempMove : MonoBehaviour
                                      //Om den är true så kontolleras objektet, se ln 49
     Rigidbody2D rb;
     Collider2D playerCollider;
+    Collider2D triggerCollider;
+
+    public List<AudioClip> audioClips;
+    [SerializeField] AudioSource audioSource;
 
     [SerializeField] float speed = 2f;
-    [SerializeField] GameObject obj;
+    tempEnemy obj;
     [SerializeField] float jumpPower = 10f;
 
     tempEnemy enemy; //temporärt innnan ett system för att ta över fiender finns
@@ -21,6 +31,10 @@ public class tempMove : MonoBehaviour
 
     bool jump;
 
+    bool isEnemyNear = false;
+
+    bool isWalking = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,72 +44,93 @@ public class tempMove : MonoBehaviour
             return;
         }
 
-        if (obj != null)
-        {
-            enemy = obj.GetComponent<tempEnemy>();
-        }
-        else
-        {
-            return;
-        }
-
-        playerCollider = GetComponent<Collider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
         if (playerCollider == null)
         {
             Debug.Log($"error: {transform.name} har ej en collider2D");
             return;
         }
 
+        triggerCollider = GetComponent<CircleCollider2D>();
+        if (triggerCollider == null)
+        {
+            Debug.Log($"{transform.name} har inte en CircleCollider2D");
+            return;
+        }
+
         cam = Camera.main;
+
+        StartCoroutine(Footstep());
     }
 
     void Update() //all input hanteras här
     {
+        isWalking = false;
+
         if (isControlled)
         {
+            moveX = 0f;
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveX += 1f;
+
+                isWalking = true;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX -= 1f;
+
+                isWalking = true;
+            }
+
             if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX = 0f;
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    moveX = 1f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    moveX = -1f;
-                }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     jump = true;
                 }
             }
 
-            //flyttar på kameran, Slerp så att kameran inte bara teleporterar
+            //flyttar på kameran, Lerp så att kameran inte bara teleporterar
             cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && enemy != null) //temporär keybind innan vi kommit på hur man ska ta över fiender
+        if (Input.GetKeyDown(KeyCode.G)) //temporär keybind innan vi kommit på hur man ska ta över fiender
         {
             if (isControlled)
             {
                 isControlled = false;
-                enemy.isControlled = true;
+                obj.isControlled = true;
             }
             else if (!isControlled)
             {
                 isControlled = true;
-                enemy.isControlled = false;
+                obj.isControlled = false;
             }
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var enemyScript = other.GetComponent<tempEnemy>();
+
+        if (enemyScript != null && isEnemyNear == false)
+        {
+            obj = enemyScript;
+
+            isEnemyNear = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isEnemyNear = false;
+    }
+
     void FixedUpdate() //allt som involverar fysik hanteras här
     {
-        if (IsGrounded())
-        {
-            rb.linearVelocityX = moveX * speed;
-        }
+        rb.linearVelocityX = moveX * speed;
 
         if (jump)
         {
@@ -115,5 +150,25 @@ public class tempMove : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(new Vector2(playerCollider.bounds.max.x, playerCollider.bounds.min.y), Vector2.down, 0.3f, groundLayerMask);
 
         return leftHit || rightHit;
+    }
+
+    IEnumerator Footstep()
+    {
+        while (true)
+        {
+            if (isWalking && IsGrounded())
+            {
+                int r = UnityEngine.Random.Range(0, audioClips.Count);
+                AudioClip clip = audioClips[r];
+                audioSource.clip = clip;
+                audioSource.Play();
+
+                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ public class tempEnemy : MonoBehaviour
     [SerializeField] float jumpPower = 2f;
 
     Collider2D playerCollider;
+    Collider2D triggerRange;
     public LayerMask groundLayerMask;
 
     Camera cam;
@@ -23,14 +24,22 @@ public class tempEnemy : MonoBehaviour
         if (rb == null)
         {
             Debug.Log($"error: {transform.name} har ej en rigidbody2D");
+            return;
         }
 
         cam = Camera.main;
 
-        playerCollider = GetComponent<Collider2D>();
+        triggerRange = GetComponent<CircleCollider2D>();
+        if ( triggerRange == null )
+        {
+            return;
+        }
+
+        playerCollider = GetComponent<CapsuleCollider2D>();
         if (playerCollider == null)
         {
             Debug.Log($"error: {transform.name} har ej en collider2D");
+            return;
         }
     }
 
@@ -38,18 +47,19 @@ public class tempEnemy : MonoBehaviour
     {
         if (isControlled) 
         {
+            moveX = 0f;
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveX += 1f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX -= 1f;
+            }
+
             if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX = 0f;
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    moveX += 1f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    moveX -= 1f;
-                }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     jump = true;
@@ -58,17 +68,6 @@ public class tempEnemy : MonoBehaviour
 
             cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         } 
-    }
-
-    void FixedUpdate() //all fysik hanteras här
-    {
-        rb.linearVelocityX = moveX * speed;
-
-        if (jump)
-        {
-            rb.linearVelocityY += jumpPower;
-            jump = false;
-        }
     }
 
     bool IsGrounded()

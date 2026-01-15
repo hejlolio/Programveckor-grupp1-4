@@ -22,6 +22,10 @@ public class killing : MonoBehaviour
 
         }
         Destroy(gameObject);
+
+        //I'm killing you. I'm killing you.
+        //I don't care about anything else, I don't give a shit about anything else, I- My programming is just "GET THAT FUCKING GUY RIGHT NOW".
+        //It doesn't- There's no, like, "Oh, he's running? Oh, back off a little!", it's just THUMP THUMP THUMP until I get you. 
     }
 
 }
