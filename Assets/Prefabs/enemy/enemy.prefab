@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbadad298cee59a46984951dded1d868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LineOfSight
-  radius: 10
-  angle: 120
+  radius: 7
+  angle: 90
   targetLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -231,7 +231,7 @@ SliderJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureAngle: 1
-  m_Angle: 90
+  m_Angle: -175.64323
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackWhenSeeing
   thrownObject: {fileID: 1466836476134104575, guid: 69f72880a8d87f24caf022fdde006534, type: 3}
   throwTarget: {fileID: 0}
-  coolDown: 2
+  coolDown: 5
   eyes: {fileID: 530522798828765009}
   LOS: {fileID: 0}
   lead: {fileID: 0}
