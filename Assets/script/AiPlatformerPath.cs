@@ -31,7 +31,7 @@ public class AiPlatformerPath : MonoBehaviour
     void Start()
     {
         seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); 
         targetList = GetComponent<PathfindingTargetList>();
 
         //Update the path an amount of times per second equal to repathInterval

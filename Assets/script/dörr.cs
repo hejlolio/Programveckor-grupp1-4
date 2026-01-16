@@ -51,7 +51,7 @@ public class dörr : MonoBehaviour
         {
             isPlayerNearby = true;
 
-            if (nextLevel != "")
+            if (nextLevel != "" && isLevelTransition == true)
             {
                 StartCoroutine(SwitchScene(nextLevel));
             }
@@ -59,7 +59,7 @@ public class dörr : MonoBehaviour
         else
         {
             //StartCoroutine(RevealText("You're not the right shape"));
-            StartCoroutine(BlinkenLight());
+           // StartCoroutine(BlinkenLight());
         }
     }
 
