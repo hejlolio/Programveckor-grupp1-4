@@ -35,7 +35,7 @@ public class killing : MonoBehaviour
             enemycompoment.TakeDamage(damage);
 
         }
-        Object.Destroy(gameObject, 3f);
+        Object.Destroy(gameObject, 1.5f);
 
         //I'm killing you. I'm killing you.
         //I don't care about anything else, I don't give a shit about anything else, I- My programming is just "GET THAT FUCKING GUY RIGHT NOW".
