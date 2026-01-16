@@ -109,8 +109,8 @@ public class tempMove : MonoBehaviour
                 enemyThrow.enabled = false;
                 enemyPath.enabled = false;
 
-                obj.gameObject.tag = "Enemy1";
-                obj.gameObject.layer = 9;
+                //obj.gameObject.tag = "Enemy1";
+                //obj.gameObject.layer = 9;
             }
             else if (!isControlled)
             {
