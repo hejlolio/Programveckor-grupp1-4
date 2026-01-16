@@ -18,10 +18,10 @@ public class tempMove : MonoBehaviour
     [SerializeField] AudioSource audioSource;
 
     [SerializeField] float speed = 2f;
-    tempEnemy obj;
+    public tempEnemy obj;
     [SerializeField] float jumpPower = 10f;
 
-    tempEnemy enemy; //temporärt innnan ett system för att ta över fiender finns
+    //public tempEnemy enemy; //temporärt innnan ett system för att ta över fiender finns
 
     Camera cam;
 
@@ -31,7 +31,7 @@ public class tempMove : MonoBehaviour
 
     bool jump;
 
-    bool isEnemyNear = false;
+    public bool isEnemyNear = false;
 
     bool isWalking = false;
 
@@ -47,7 +47,7 @@ public class tempMove : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();
         if (playerCollider == null)
         {
-            Debug.Log($"error: {transform.name} har ej en collider2D");
+            Debug.Log($"error: {transform.name} har ej en Capsulecollider2D");
             return;
         }
 
@@ -96,12 +96,21 @@ public class tempMove : MonoBehaviour
             cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G)) //temporär keybind innan vi kommit på hur man ska ta över fiender
+        if (Input.GetKeyDown(KeyCode.G) && Vector3.Distance(transform.position, obj.gameObject.transform.position) < 5)
         {
             if (isControlled)
             {
                 isControlled = false;
                 obj.isControlled = true;
+
+                var enemyPath = obj.GetComponent<SliderJoint2D>();
+                var enemyThrow = obj.GetComponent<AttackWhenSeeing>();
+
+                enemyThrow.enabled = false;
+                enemyPath.enabled = false;
+
+                obj.gameObject.tag = "Enemy1";
+                obj.gameObject.layer = 9;
             }
             else if (!isControlled)
             {
@@ -111,8 +120,10 @@ public class tempMove : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /* private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"{other} ENTERED TRIGGER");
+
         var enemyScript = other.GetComponent<tempEnemy>();
 
         if (enemyScript != null && isEnemyNear == false)
@@ -126,7 +137,7 @@ public class tempMove : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isEnemyNear = false;
-    }
+    } */
 
     void FixedUpdate() //allt som involverar fysik hanteras här
     {
@@ -160,8 +171,8 @@ public class tempMove : MonoBehaviour
             {
                 int r = UnityEngine.Random.Range(0, audioClips.Count);
                 AudioClip clip = audioClips[r];
-                audioSource.clip = clip;
-                audioSource.Play();
+
+                audioSource.PlayOneShot(clip, 1);
 
                 yield return new WaitForSeconds(0.2f);
             }
