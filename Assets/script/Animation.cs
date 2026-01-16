@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Animation : MonoBehaviour
@@ -13,11 +14,27 @@ public class Animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.D))
+        {
             animator.SetBool("IsRunning", true);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+       else if (Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("IsRunning", true);
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
 
-        if (Input.GetKey(KeyCode.A))
-            animator.SetBool("IsRunning", true);
-        transform.localScale = new Vector3(-1, 1, 1);
+
+
+
+
+
+
     }
 }

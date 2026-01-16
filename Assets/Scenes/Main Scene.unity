@@ -21800,6 +21800,41 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6868012444817362338, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
   m_PrefabInstance: {fileID: 9215922158446023519}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1460394681
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460394680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cdfff0d04615a5c4baf68d7707185aa5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1460394682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460394680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5e4791a865e594e98a79112f7f1cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Animation
+  animator: {fileID: 1460394681}
 --- !u!1 &1469671466
 GameObject:
   m_ObjectHideFlags: 0
@@ -35756,6 +35791,18 @@ PrefabInstance:
       propertyPath: PlayerCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3874931623366012608, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874931623366012608, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874931623366012608, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6868012444817362338, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
       propertyPath: m_Name
       value: Player
@@ -35812,7 +35859,13 @@ PrefabInstance:
     - {fileID: 6115168929540016968, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6868012444817362338, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1460394682}
+    - targetCorrespondingSourceObject: {fileID: 6868012444817362338, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1460394681}
   m_SourcePrefab: {fileID: 100100000, guid: 620631a29aee4b64184deb8ce1e636d7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
