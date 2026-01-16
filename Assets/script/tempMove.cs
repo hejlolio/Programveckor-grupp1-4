@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.Audio;
+using static UnityEngine.GraphicsBuffer;
 
 public class tempMove : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class tempMove : MonoBehaviour
     //[SerializeField] private Animator animator;
 
     [SerializeField] float speed = 2f;
-    public tempEnemy obj;
+    [SerializeField] List<GameObject> enemies;
     [SerializeField] float jumpPower = 10f;
 
     //public tempEnemy enemy; //temporärt innnan ett system för att ta över fiender finns
@@ -35,6 +36,8 @@ public class tempMove : MonoBehaviour
     public bool isEnemyNear = false;
 
     bool isWalking = false;
+
+    tempEnemy obj;
 
     void Start()
     {
@@ -67,6 +70,8 @@ public class tempMove : MonoBehaviour
     void Update() //all input hanteras här
     {
         isWalking = false;
+
+        obj = GetClosest().GetComponent<tempEnemy>();
 
         if (isControlled)
         {
@@ -107,9 +112,9 @@ public class tempMove : MonoBehaviour
             cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && Vector3.Distance(transform.position, obj.gameObject.transform.position) < 5)
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            if (isControlled)
+            if (isControlled && Vector3.Distance(transform.position, obj.gameObject.transform.position) < 5)
             {
                 isControlled = false;
                 obj.isControlled = true;
@@ -192,5 +197,24 @@ public class tempMove : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    GameObject GetClosest()
+    {
+        GameObject closest = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject e in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, e.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = e;
+            }
+        }
+
+        return closest;
     }
 }
