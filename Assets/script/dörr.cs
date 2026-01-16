@@ -45,7 +45,9 @@ public class dörr : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(neededTagName) && ((1 << collision.gameObject.layer) & targetLayer) != 0)
+        Debug.Log($"Something entered trigger with {collision.gameObject.tag}, {collision.gameObject.layer}");
+
+        if (collision.gameObject.CompareTag(neededTagName) && (targetLayer.value & (1 << collision.gameObject.layer) & targetLayer) != 0)
         {
             isPlayerNearby = true;
 
@@ -56,7 +58,7 @@ public class dörr : MonoBehaviour
         }
         else
         {
-            StartCoroutine(RevealText("You're not the right shape"));
+            //StartCoroutine(RevealText("You're not the right shape"));
             StartCoroutine(BlinkenLight());
         }
     }
