@@ -47,7 +47,7 @@ public class dörr : MonoBehaviour
     {
         Debug.Log($"Something entered trigger with {collision.gameObject.tag}, {collision.gameObject.layer}");
 
-        if (collision.gameObject.CompareTag(neededTagName) && (targetLayer.value & (1 << collision.gameObject.layer) & targetLayer) != 0)
+        if ((targetLayer.value & (1 << collision.gameObject.layer) & targetLayer) != 0)
         {
             isPlayerNearby = true;
 
@@ -65,7 +65,7 @@ public class dörr : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (isPlayerNearby && collision.gameObject.CompareTag(neededTagName) && ((1 << collision.gameObject.layer) & targetLayer) != 0)
+        if (isPlayerNearby && ((1 << collision.gameObject.layer) & targetLayer) != 0)
         {
             isPlayerNearby = false;
         }
