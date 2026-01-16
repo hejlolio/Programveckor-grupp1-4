@@ -11,8 +11,8 @@ public class LineOfSight : MonoBehaviour
 
     public GameObject PlayerRef;
 
-    public bool CanSeePlayer {  get; private set; }
-   
+    public bool CanSeePlayer { get; private set; }
+
     void Start()
     {
         PlayerRef = GameObject.FindGameObjectWithTag("Player");
@@ -52,7 +52,7 @@ public class LineOfSight : MonoBehaviour
                 CanSeePlayer = false;
         }
         else if (CanSeePlayer)
-            CanSeePlayer = false; 
+            CanSeePlayer = false;
     }
     private void OnDrawGizmos()
     {
@@ -62,7 +62,7 @@ public class LineOfSight : MonoBehaviour
         Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, -angle / 2);
         Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, angle / 2);
 
-        Gizmos.color = Color.yellow; 
+        Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
         Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 

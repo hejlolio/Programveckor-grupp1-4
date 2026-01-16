@@ -38,6 +38,7 @@ public class AiThroughOneWay : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Physics2D.IgnoreCollision(myCollider2D, hit.collider, true);
+                    print($"ignoring collision {hit.collider.gameObject}");
                 }
             }
         }

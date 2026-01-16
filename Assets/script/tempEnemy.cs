@@ -9,7 +9,6 @@ public class tempEnemy : MonoBehaviour
     [SerializeField] float jumpPower = 2f;
 
     Collider2D playerCollider;
-    Collider2D triggerRange;
     public LayerMask groundLayerMask;
 
     Camera cam;
@@ -29,13 +28,7 @@ public class tempEnemy : MonoBehaviour
 
         cam = Camera.main;
 
-        triggerRange = GetComponent<CircleCollider2D>();
-        if ( triggerRange == null )
-        {
-            return;
-        }
-
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<Collider2D>();
         if (playerCollider == null)
         {
             Debug.Log($"error: {transform.name} har ej en collider2D");
@@ -47,27 +40,41 @@ public class tempEnemy : MonoBehaviour
     {
         if (isControlled) 
         {
+            moveX = 0f;
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveX += 1f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX -= 1f;
+            }
+
             if (IsGrounded()) //om spelaren nuddar marken
             {
-                moveX = 0f;
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    moveX += 1f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    moveX -= 1f;
-                }
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     jump = true;
                 }
             }
 
-            cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         } 
     }
+
+    void FixedUpdate()
+{
+    if (!isControlled) return;
+
+    rb.linearVelocityX = moveX * speed;
+
+    if (jump)
+    {
+        rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        jump = false;
+    }
+}
 
     bool IsGrounded()
     {

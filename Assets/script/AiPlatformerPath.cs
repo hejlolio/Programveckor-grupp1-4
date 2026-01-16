@@ -7,6 +7,9 @@ public class AiPlatformerPath : MonoBehaviour
     //target where the lead will try to move to
     Transform target;
 
+    public GameObject self;
+    public GameObject selfEyes;
+
     public PathfindingTargetList targetList;
     public UnityEvent hasReachedEnd;
 
@@ -33,6 +36,7 @@ public class AiPlatformerPath : MonoBehaviour
 
         //Update the path an amount of times per second equal to repathInterval
         InvokeRepeating("UpdatePath", 0f, repathInterval);
+
     }
     void UpdatePath()
     {
@@ -92,6 +96,17 @@ public class AiPlatformerPath : MonoBehaviour
         if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
+        }
+
+        if (rb.linearVelocityX > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            selfEyes.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        }
+        if (rb.linearVelocityX < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            selfEyes.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class dörr : MonoBehaviour
@@ -17,6 +19,8 @@ public class dörr : MonoBehaviour
     [SerializeField] string nextLevel;
 
     [SerializeField] TextMeshProUGUI TextField;
+
+    [SerializeField] List<Light2D> lights;
 
     bool isPlayerNearby = false;
 
@@ -53,6 +57,7 @@ public class dörr : MonoBehaviour
         else
         {
             StartCoroutine(RevealText("You're not the right shape"));
+            StartCoroutine(BlinkenLight());
         }
     }
 
@@ -85,5 +90,25 @@ public class dörr : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         TextField.text = "";
+    }
+
+    IEnumerator BlinkenLight() 
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            foreach(Light2D l in lights)
+            {
+                l.enabled = true;
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach(Light2D l in lights)
+            {
+                l.enabled = false;
+            }
+
+            yield return new WaitForSeconds(2);
+        }
     }
 }
