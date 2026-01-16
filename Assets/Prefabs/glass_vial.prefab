@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FollowTarget
   rb: {fileID: 0}
   target: {fileID: 0}
-  speed: 700
+  speed: 1000
   minMaxTorque: {x: 20, y: 100}
 --- !u!114 &3368610099911282535
 MonoBehaviour:
