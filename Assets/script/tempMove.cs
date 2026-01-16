@@ -16,6 +16,7 @@ public class tempMove : MonoBehaviour
 
     public List<AudioClip> audioClips;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] private Animator animator;
 
     [SerializeField] float speed = 2f;
     public tempEnemy obj;
@@ -76,12 +77,14 @@ public class tempMove : MonoBehaviour
                 moveX += 1f;
 
                 isWalking = true;
+                transform.localScale = new Vector3(1, 1, 1);
             }
             if (Input.GetKey(KeyCode.A))
             {
                 moveX -= 1f;
 
                 isWalking = true;
+                transform.localScale = new Vector3 (-1, 1, 1);  
             }
 
             if (IsGrounded()) //om spelaren nuddar marken
@@ -91,9 +94,17 @@ public class tempMove : MonoBehaviour
                     jump = true;
                 }
             }
+            if (isWalking == true)
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", false);
+            }
 
-            //flyttar på kameran, Lerp så att kameran inte bara teleporterar
-            cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+                //flyttar på kameran, Lerp så att kameran inte bara teleporterar
+                cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
         if (Input.GetKeyDown(KeyCode.G) && Vector3.Distance(transform.position, obj.gameObject.transform.position) < 5)
