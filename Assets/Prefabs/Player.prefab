@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -5115618752126089108, guid: 8f003dc5400b0a54597a6c4245acfec8, type: 3}
   m_Color: {r: 0, g: 0.6541331, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8c2fe180901453dff9b4f82855863acc, type: 3}
   audioSource: {fileID: 5624497918649365180}
   speed: 3
-  obj: {fileID: 0}
+  enemies: []
   jumpPower: 8.5
   groundLayerMask:
     serializedVersion: 2
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::health
   healthBar: {fileID: 0}
   liv: 1
-  maxhealth: 2
+  maxhealth: 18
 --- !u!58 &8663867952546761133
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -285,8 +285,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.008891523, y: 0.18729538}
-  m_Size: {x: 0.82572305, y: 1.3745908}
+  m_Offset: {x: 0.008891523, y: 0}
+  m_Size: {x: 0.5, y: 1.7}
   m_Direction: 0
 --- !u!1 &8725748989448656214
 GameObject:
