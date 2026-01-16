@@ -16,7 +16,7 @@ public class tempMove : MonoBehaviour
 
     public List<AudioClip> audioClips;
     [SerializeField] AudioSource audioSource;
-    [SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator;
 
     [SerializeField] float speed = 2f;
     public tempEnemy obj;
@@ -77,14 +77,14 @@ public class tempMove : MonoBehaviour
                 moveX += 1f;
 
                 isWalking = true;
-                transform.localScale = new Vector3(1, 1, 1);
+                //transform.localScale = new Vector3(1, 1, 1);
             }
             if (Input.GetKey(KeyCode.A))
             {
                 moveX -= 1f;
 
                 isWalking = true;
-                transform.localScale = new Vector3 (-1, 1, 1);  
+                //transform.localScale = new Vector3 (-1, 1, 1);  
             }
 
             if (IsGrounded()) //om spelaren nuddar marken
@@ -94,17 +94,17 @@ public class tempMove : MonoBehaviour
                     jump = true;
                 }
             }
-            if (isWalking == true)
+            /*if (isWalking == true)
             {
                 animator.SetBool("IsRunning", true);
             }
             else
             {
                 animator.SetBool("IsRunning", false);
-            }
+            } */
 
                 //flyttar på kameran, Lerp så att kameran inte bara teleporterar
-                cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
+            cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -100), 0.05f);
         }
 
         if (Input.GetKeyDown(KeyCode.G) && Vector3.Distance(transform.position, obj.gameObject.transform.position) < 5)
@@ -131,7 +131,7 @@ public class tempMove : MonoBehaviour
         }
     }
 
-    /* private void OnTriggerEnter2D(Collider2D other)
+     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"{other} ENTERED TRIGGER");
 
@@ -148,7 +148,7 @@ public class tempMove : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isEnemyNear = false;
-    } */
+    } 
 
     void FixedUpdate() //allt som involverar fysik hanteras här
     {
