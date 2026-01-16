@@ -7,6 +7,8 @@ public class killing : MonoBehaviour
     public Collider2D collider2D;
     ParticleSystem particleSystem;
 
+    [SerializeField] float damage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,7 +32,7 @@ public class killing : MonoBehaviour
         emission.enabled = false;
         if (collision.gameObject.TryGetComponent<health>(out health enemycompoment))
         {
-            enemycompoment.TakeDamage(1);
+            enemycompoment.TakeDamage(damage);
 
         }
         Object.Destroy(gameObject, 3f);

@@ -196,6 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f562622a683df0645b60b0037787f436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::killing
+  spriteRenderer: {fileID: 0}
+  rb: {fileID: 0}
+  collider2D: {fileID: 0}
+  damage: 7
 --- !u!1 &8077224002048707835
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +812,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
